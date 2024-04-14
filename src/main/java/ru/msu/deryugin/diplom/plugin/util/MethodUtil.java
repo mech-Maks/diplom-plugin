@@ -2,13 +2,14 @@ package ru.msu.deryugin.diplom.plugin.util;
 
 import com.intellij.psi.PsiType;
 import lombok.experimental.UtilityClass;
+import ru.msu.deryugin.diplom.plugin.dto.JoinPointContext;
+import ru.msu.deryugin.diplom.plugin.dto.PointCutContext;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.regex.Pattern;
-
-import static java.util.Objects.isNull;
 
 @UtilityClass
 public class MethodUtil {
@@ -54,5 +55,18 @@ public class MethodUtil {
                     return  returnTypeParts[returnTypeParts.length - 1];
                 })
                 .orElse("void");
+    }
+
+    public static boolean joinPointCorrespondsPointcutContext(PointCutContext aspectPointCutContext, JoinPointContext methodJoinPointContext) {
+        return Objects.equals(aspectPointCutContext.getPkgName(), methodJoinPointContext.getPkgName())
+                && Objects.equals(aspectPointCutContext.getClassName(), methodJoinPointContext.getClassName())
+                && Objects.equals(aspectPointCutContext.getMethodName(), methodJoinPointContext.getMethodName())
+                && (
+                aspectPointCutContext.getReturnType().equals("*") || Objects.equals(aspectPointCutContext.getReturnType(), methodJoinPointContext.getReturnType())
+        )
+                && (
+                aspectPointCutContext.isAnyArgs() || Objects.equals(aspectPointCutContext.getArgs(), methodJoinPointContext.getArgs()
+                )
+        );
     }
 }

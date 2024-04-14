@@ -7,6 +7,9 @@ import lombok.experimental.Accessors;
 
 import java.util.LinkedList;
 
+/**
+ * Контекст среза при объявлении аспектов
+ */
 @Data
 @Accessors(chain = true)
 @AllArgsConstructor
@@ -18,5 +21,9 @@ public class PointCutContext {
     private String returnType;
     private LinkedList<String> args;
     private boolean anyArgs;
+    /**
+     * Поле необходимо для отслеживания аспектов: имеющих одинаковый контекст, но отличающихся
+     * логикой (в частности названием аспекта, идентифицирующим логику)
+     */
     private String pointCutReferenceName;
 }

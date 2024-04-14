@@ -20,10 +20,10 @@
 
 
     <extensions defaultExtensionNs="com.intellij">
-        <postStartupActivity implementation="ru.msu.deryugin.diplom.plugin.startup.AopTreeProjectStartUpActivity"/>
+        <postStartupActivity implementation="ru.msu.deryugin.diplom.plugin.aop.startup.AopProjectLoaderStartUpActivity"/>
 
         <codeInsight.lineMarkerProvider
                 language="JAVA"
-                implementationClass="ru.msu.deryugin.diplom.plugin.marker.SimpleLineMarkerProvider"/>
+                implementationClass="ru.msu.deryugin.diplom.plugin.marker.AopReferenceLineMarker"/>
     </extensions>
 </idea-plugin>
