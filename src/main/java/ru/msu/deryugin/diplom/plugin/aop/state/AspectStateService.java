@@ -7,6 +7,7 @@ import com.intellij.psi.PsiMethod;
 import com.intellij.psi.impl.source.PsiJavaFileImpl;
 import lombok.extern.slf4j.Slf4j;
 import ru.msu.deryugin.diplom.plugin.aop.state.loader.AopReferenceFetcher;
+import ru.msu.deryugin.diplom.plugin.aop.state.loader.inst.AnnotationAopReferenceFetcher;
 import ru.msu.deryugin.diplom.plugin.aop.state.loader.inst.MethodExecutionAopReferenceFetcher;
 import ru.msu.deryugin.diplom.plugin.dto.PointCutContext;
 
@@ -28,7 +29,8 @@ public class AspectStateService {
 
     public AspectStateService() {
         aopReferenceFetchers = List.of(
-                new MethodExecutionAopReferenceFetcher()
+                new MethodExecutionAopReferenceFetcher(),
+                new AnnotationAopReferenceFetcher()
         );
     }
 

@@ -58,15 +58,30 @@ public class MethodUtil {
     }
 
     public static boolean joinPointCorrespondsPointcutContext(PointCutContext aspectPointCutContext, JoinPointContext methodJoinPointContext) {
+        if (!Objects.equals(aspectPointCutContext.isAnnotation(), methodJoinPointContext.isAnnotation())) {
+            return false;
+        }
+
+
+        return methodJoinPointContext.isAnnotation()
+                ? joinPointCorrespondsPointcutContextAnnotationCase(aspectPointCutContext, methodJoinPointContext)
+                : joinPointCorrespondsPointcutContextExecutionCase(aspectPointCutContext, methodJoinPointContext);
+    }
+
+    private static boolean joinPointCorrespondsPointcutContextExecutionCase(PointCutContext aspectPointCutContext, JoinPointContext methodJoinPointContext) {
         return Objects.equals(aspectPointCutContext.getPkgName(), methodJoinPointContext.getPkgName())
                 && Objects.equals(aspectPointCutContext.getClassName(), methodJoinPointContext.getClassName())
                 && Objects.equals(aspectPointCutContext.getMethodName(), methodJoinPointContext.getMethodName())
                 && (
-                aspectPointCutContext.getReturnType().equals("*") || Objects.equals(aspectPointCutContext.getReturnType(), methodJoinPointContext.getReturnType())
-        )
-                && (
-                aspectPointCutContext.isAnyArgs() || Objects.equals(aspectPointCutContext.getArgs(), methodJoinPointContext.getArgs()
+                    aspectPointCutContext.getReturnType().equals("*") || Objects.equals(aspectPointCutContext.getReturnType(), methodJoinPointContext.getReturnType())
                 )
-        );
+                && (
+                    aspectPointCutContext.isAnyArgs() || Objects.equals(aspectPointCutContext.getArgs(), methodJoinPointContext.getArgs())
+                );
+    }
+
+    private static boolean joinPointCorrespondsPointcutContextAnnotationCase(PointCutContext aspectPointCutContext, JoinPointContext methodJoinPointContext) {
+        return Objects.equals(aspectPointCutContext.getPkgName(), methodJoinPointContext.getPkgName())
+                && Objects.equals(aspectPointCutContext.getAnnotationName(), methodJoinPointContext.getAnnotationName());
     }
 }

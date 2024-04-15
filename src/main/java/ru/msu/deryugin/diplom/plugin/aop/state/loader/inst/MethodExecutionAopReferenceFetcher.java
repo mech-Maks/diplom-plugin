@@ -41,7 +41,15 @@ public class MethodExecutionAopReferenceFetcher implements AopReferenceFetcher {
 
                         boolean anyArgs = argList.size() == 1 && argList.get(0).equals("*");
 
-                        var pointCutContext = new PointCutContext(pkgName, className, methodName, returnType, argList, anyArgs, classMethod.getName());
+                        var pointCutContext = new PointCutContext()
+                                .setPkgName(pkgName)
+                                .setClassName(className)
+                                .setMethodName(methodName)
+                                .setReturnType(returnType)
+                                .setArgs(argList)
+                                .setAnyArgs(anyArgs)
+                                .setPointCutReferenceName(classMethod.getName());
+
                         aspectMap.put(pointCutContext, classMethod);
                     });
                 }

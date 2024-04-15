@@ -20,4 +20,7 @@ public class JoinPointContext {
     private String methodName;
     private String returnType;
     private LinkedList<String> args;
+
+    private boolean isAnnotation;
+    private String annotationName;
 }

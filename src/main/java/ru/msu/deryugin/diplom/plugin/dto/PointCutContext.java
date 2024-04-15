@@ -26,4 +26,7 @@ public class PointCutContext {
      * логикой (в частности названием аспекта, идентифицирующим логику)
      */
     private String pointCutReferenceName;
+
+    private boolean isAnnotation;
+    private String annotationName;
 }
