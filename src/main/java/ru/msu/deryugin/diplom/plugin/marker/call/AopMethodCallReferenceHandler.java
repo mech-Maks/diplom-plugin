@@ -1,7 +1,10 @@
 package ru.msu.deryugin.diplom.plugin.marker.call;
 
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiExpression;
+import com.intellij.psi.PsiMethod;
+import com.intellij.psi.PsiMethodCallExpression;
 import com.intellij.psi.util.PsiUtil;
 import ru.msu.deryugin.diplom.plugin.aop.state.AspectStateService;
 import ru.msu.deryugin.diplom.plugin.context.dto.JoinPointContext;
@@ -12,17 +15,14 @@ import ru.msu.deryugin.diplom.plugin.context.fetcher.impl.ClassHierarchyMethodCo
 import ru.msu.deryugin.diplom.plugin.marker.AbstractAopReferenceHandler;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-import static java.util.Objects.isNull;
-import static ru.msu.deryugin.diplom.plugin.util.MethodUtil.getReturnType;
 import static ru.msu.deryugin.diplom.plugin.util.MethodUtil.joinPointCorrespondsPointcutContext;
 
 public class AopMethodCallReferenceHandler extends AbstractAopReferenceHandler {
-    public final List<MethodContextFetcher> contextFetchers;
+    public final List<MethodContextFetcher> joinPointContextFetchers;
 
     public AopMethodCallReferenceHandler() {
-        this.contextFetchers = List.of(
+        this.joinPointContextFetchers = List.of(
                 new AnnotationMethodContextFetcher(),
                 new ClassHierarchyMethodContextFetcher()
         );
@@ -33,7 +33,7 @@ public class AopMethodCallReferenceHandler extends AbstractAopReferenceHandler {
         var psiMethodCalled = psiMethodCallExpression.resolveMethod();
         var classContainingCalledMethod = getClassContainingMethod(psiMethodCallExpression);
 
-        contextFetchers.forEach(fetcher -> fetcher.fetchContexts(psiMethodCalled, methodJoinPointContextSet, classContainingCalledMethod, FetcherSubject.METHOD_CALL));
+        joinPointContextFetchers.forEach(fetcher -> fetcher.fetchContexts(psiMethodCalled, methodJoinPointContextSet, classContainingCalledMethod, FetcherSubject.METHOD_CALL));
 
         var aspectMap = AspectStateService.getAspectMap();
 

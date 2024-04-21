@@ -5,7 +5,6 @@ import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.impl.source.PsiJavaFileImpl;
-import lombok.extern.slf4j.Slf4j;
 import ru.msu.deryugin.diplom.plugin.aop.state.loader.AopReferenceFetcher;
 import ru.msu.deryugin.diplom.plugin.aop.state.loader.inst.AnnotationAopReferenceFetcher;
 import ru.msu.deryugin.diplom.plugin.aop.state.loader.inst.MethodExecutionAopReferenceFetcher;
@@ -18,10 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Класс
- */
-@Slf4j
 public class AspectStateService {
     private static boolean isAspectMapConstructed = false;
     private static final Map<PointCutContext, PsiMethod> aspectMap = new HashMap<>();
@@ -55,8 +50,8 @@ public class AspectStateService {
 
             isAspectMapConstructed = true;
         } catch (Exception e) {
-            log.error("Error occurred during constructing aspect map", e);
-            return;
+            System.out.println("Error occurred during constructing aspect map");
+            System.out.println(e);
         }
     }
 

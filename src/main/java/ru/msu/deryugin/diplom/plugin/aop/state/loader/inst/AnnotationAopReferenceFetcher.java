@@ -2,7 +2,6 @@ package ru.msu.deryugin.diplom.plugin.aop.state.loader.inst;
 
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.impl.source.PsiJavaFileImpl;
-import lombok.extern.slf4j.Slf4j;
 import ru.msu.deryugin.diplom.plugin.aop.state.loader.AopReferenceFetcher;
 import ru.msu.deryugin.diplom.plugin.context.dto.PointCutContext;
 
@@ -11,7 +10,6 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 
-@Slf4j
 public class AnnotationAopReferenceFetcher implements AopReferenceFetcher {
     @Override
     public void fetchAspectsFromFile(PsiJavaFileImpl psiJavaFile, Map<PointCutContext, PsiMethod> aspectMap) {
@@ -22,7 +20,6 @@ public class AnnotationAopReferenceFetcher implements AopReferenceFetcher {
 
                 if (matcher.matches()) {
                     var pointCutDeclaration = classMethod.getText().substring(matcher.start(), matcher.end());
-                    System.out.println(pointCutDeclaration);
 
                     var annotationPointCut = pointCutDeclaration.split("@annotation\\(")[1].replace(")\")", "");
 
@@ -39,7 +36,7 @@ public class AnnotationAopReferenceFetcher implements AopReferenceFetcher {
                     aspectMap.put(pointCutContext, classMethod);
                 }
             } catch (Exception e) {
-                log.error("Error occurred during processing classMethod {}", classMethod);
+                System.out.println("Error occurred during processing classMethod " + classMethod);
             }
         });
     }

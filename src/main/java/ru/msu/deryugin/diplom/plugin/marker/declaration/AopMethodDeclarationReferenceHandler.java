@@ -16,9 +16,9 @@ import java.util.*;
 import static ru.msu.deryugin.diplom.plugin.util.MethodUtil.joinPointCorrespondsPointcutContext;
 
 public class AopMethodDeclarationReferenceHandler extends AbstractAopReferenceHandler {
-    private final List<MethodContextFetcher> contextFetchers;
+    private final List<MethodContextFetcher> joinPointContextFetchers;
     public AopMethodDeclarationReferenceHandler() {
-        contextFetchers = List.of(
+        joinPointContextFetchers = List.of(
                 new AnnotationMethodContextFetcher(),
                 new ClassHierarchyMethodContextFetcher()
         );
@@ -26,7 +26,7 @@ public class AopMethodDeclarationReferenceHandler extends AbstractAopReferenceHa
 
     public void handle(PsiMethodImpl psiMethodImpl, Collection<? super RelatedItemLineMarkerInfo<?>> result) {
         Set<JoinPointContext> methodJoinPointContextSet = new HashSet<>();
-        contextFetchers.forEach(fetcher -> fetcher.fetchContexts(psiMethodImpl, methodJoinPointContextSet, null, FetcherSubject.METHOD_DECLARATION));
+        joinPointContextFetchers.forEach(fetcher -> fetcher.fetchContexts(psiMethodImpl, methodJoinPointContextSet, null, FetcherSubject.METHOD_DECLARATION));
 
         var aspectMap = AspectStateService.getAspectMap();
 

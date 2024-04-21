@@ -14,7 +14,13 @@ import static java.util.Objects.isNull;
 public class AnnotationMethodContextFetcher implements MethodContextFetcher {
     @Override
     public void fetchContexts(PsiMethod psiMethod, Set<JoinPointContext> methodJoinPointContextSet, PsiClass classContainingMethod, FetcherSubject fetcherSubject) {
+        // внутренние вызовы своих методов не аспектируются
         if (fetcherSubject.equals(FetcherSubject.METHOD_CALL) && isNull(classContainingMethod)) {
+            return;
+        }
+
+        // аннотарованные методы интерфейсов не аспектируются
+        if (fetcherSubject.equals(FetcherSubject.METHOD_DECLARATION) && psiMethod.getContainingClass().isInterface()) {
             return;
         }
 
