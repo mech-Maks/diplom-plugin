@@ -4,14 +4,12 @@ import com.intellij.psi.PsiMethod;
 import com.intellij.psi.impl.source.PsiJavaFileImpl;
 import lombok.extern.slf4j.Slf4j;
 import ru.msu.deryugin.diplom.plugin.aop.state.loader.AopReferenceFetcher;
-import ru.msu.deryugin.diplom.plugin.dto.PointCutContext;
+import ru.msu.deryugin.diplom.plugin.context.dto.PointCutContext;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import static ru.msu.deryugin.diplom.plugin.util.MethodUtil.getArgsFromMethod;
 
 @Slf4j
 public class AnnotationAopReferenceFetcher implements AopReferenceFetcher {

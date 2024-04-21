@@ -1,4 +1,4 @@
-package ru.msu.deryugin.diplom.plugin.dto;
+package ru.msu.deryugin.diplom.plugin.context.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import ru.msu.deryugin.diplom.plugin.aop.state.loader.AopReferenceFetcher;
 import ru.msu.deryugin.diplom.plugin.aop.state.loader.inst.AnnotationAopReferenceFetcher;
 import ru.msu.deryugin.diplom.plugin.aop.state.loader.inst.MethodExecutionAopReferenceFetcher;
-import ru.msu.deryugin.diplom.plugin.dto.PointCutContext;
+import ru.msu.deryugin.diplom.plugin.context.dto.PointCutContext;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;

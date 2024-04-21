@@ -7,6 +7,6 @@ import javax.swing.Icon;
 
 public class AopNavigateIcon {
 
-    public static final Icon FILE = IconLoader.getIcon("/icons/aop-navigate-icon.png", AopNavigateIcon.class);
+    public static final Icon FILE = IconLoader.getIcon("/icons/navigate-icon.png", AopNavigateIcon.class);
 
 }

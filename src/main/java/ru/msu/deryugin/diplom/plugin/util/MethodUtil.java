@@ -2,8 +2,8 @@ package ru.msu.deryugin.diplom.plugin.util;
 
 import com.intellij.psi.PsiType;
 import lombok.experimental.UtilityClass;
-import ru.msu.deryugin.diplom.plugin.dto.JoinPointContext;
-import ru.msu.deryugin.diplom.plugin.dto.PointCutContext;
+import ru.msu.deryugin.diplom.plugin.context.dto.JoinPointContext;
+import ru.msu.deryugin.diplom.plugin.context.dto.PointCutContext;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -57,6 +57,12 @@ public class MethodUtil {
                 .orElse("void");
     }
 
+    /**
+     * Соответствует ли точка соединения какому-либо из известных срезов.
+     *
+     * @param aspectPointCutContext контекст среза
+     * @param methodJoinPointContext контекст точки соединения
+     */
     public static boolean joinPointCorrespondsPointcutContext(PointCutContext aspectPointCutContext, JoinPointContext methodJoinPointContext) {
         if (!Objects.equals(aspectPointCutContext.isAnnotation(), methodJoinPointContext.isAnnotation())) {
             return false;
